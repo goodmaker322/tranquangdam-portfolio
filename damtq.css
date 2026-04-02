@@ -1098,3 +1098,433 @@ p {
         letter-spacing: 0.08em;
     }
 }
+
+/* =========================
+   MOBILE HARMONY FIX
+========================= */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+.hero-grid,
+.about-grid,
+.strategy-grid,
+.contact-grid,
+.value-grid {
+    width: 100%;
+}
+
+.hero-content,
+.strategy-content,
+.contact-info,
+.about-text,
+.about-card,
+.style-box,
+.vision-box,
+.quote-box,
+.qr-card,
+.value-card,
+.strategy-item {
+    min-width: 0;
+}
+
+.nav-menu a.active,
+.nav-menu a.is-active {
+    color: var(--cyan-soft);
+}
+
+.nav-menu a.active::after,
+.nav-menu a.is-active::after {
+    width: 100%;
+}
+
+.hero {
+    min-height: auto;
+}
+
+.hero-content {
+    width: 100%;
+}
+
+.hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.meta-item {
+    min-width: 0;
+    width: 100%;
+}
+
+.strategy-image {
+    align-items: stretch;
+}
+
+.strategy-image .image-frame,
+.strategy-image .small-frame {
+    height: 100%;
+}
+
+.contact-list li {
+    align-items: flex-start;
+    line-height: 1.6;
+}
+
+.contact-list i {
+    margin-top: 0.2rem;
+    flex: 0 0 18px;
+}
+
+.social {
+    flex-wrap: wrap;
+}
+
+.quote-box blockquote,
+.hero h1,
+.hero h1 .title-line,
+.hero-label,
+.section-label,
+.value-card h3,
+.about-card h3,
+.contact-info h2,
+.strategy-content h2,
+.vision-box h2 {
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+@media (max-width: 1080px) {
+    .hero {
+        padding: 124px 0 72px;
+    }
+
+    .hero-grid {
+        gap: 44px;
+    }
+
+    .hero-content {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .hero-desc {
+        max-width: 100%;
+        margin-inline: auto;
+    }
+
+    .hero-meta {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-image {
+        order: -1;
+        max-width: 560px;
+        margin: 0 auto;
+    }
+
+    .strategy-grid,
+    .contact-grid,
+    .about-grid {
+        gap: 28px;
+    }
+}
+
+@media (max-width: 860px) {
+    .container {
+        width: min(calc(100% - 32px), var(--container));
+    }
+
+    .navbar {
+        padding: 14px 0;
+    }
+
+    .nav-content {
+        gap: 14px;
+    }
+
+    .nav-menu {
+        top: 72px;
+        right: 16px;
+        left: 16px;
+        padding: 18px;
+        gap: 14px;
+        border-radius: 20px;
+    }
+
+    .nav-menu a {
+        width: 100%;
+        padding: 6px 0;
+        font-size: 0.96rem;
+    }
+
+    .hero {
+        padding: 108px 0 56px;
+    }
+
+    .hero-grid {
+        gap: 28px;
+    }
+
+    .hero-content {
+        text-align: left;
+    }
+
+    .hero h1 {
+        gap: 8px;
+    }
+
+    .hero h1 .intro-line {
+        font-size: 0.9rem;
+        letter-spacing: 0.24em;
+    }
+
+    .hero h1 .title-line {
+        letter-spacing: 0.06em;
+    }
+
+    .hero-desc {
+        margin-top: 20px;
+        font-size: 0.98rem;
+        line-height: 1.7;
+    }
+
+    .hero-meta {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 26px;
+    }
+
+    .meta-item {
+        padding: 16px 18px;
+    }
+
+    .meta-item strong {
+        font-size: 1.2rem;
+    }
+
+    .hero-actions {
+        margin-top: 26px;
+        gap: 12px;
+    }
+
+    .hero-image .image-frame {
+        width: min(100%, 440px);
+        aspect-ratio: 4 / 5;
+    }
+
+    .section {
+        padding: 74px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 36px;
+    }
+
+    .section-label {
+        margin-bottom: 12px;
+        letter-spacing: 0.18em;
+        font-size: 0.72rem;
+    }
+
+    .about-text,
+    .about-card,
+    .style-box,
+    .vision-box,
+    .quote-box,
+    .qr-card,
+    .value-card,
+    .strategy-item {
+        padding: 24px;
+        border-radius: 22px;
+    }
+
+    .about-card h3,
+    .value-card h3,
+    .qr-card h3 {
+        font-size: 1.38rem;
+    }
+
+    .strategy-image {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .strategy-image .small-frame {
+        aspect-ratio: 1 / 1;
+    }
+
+    .quote-box {
+        padding: 36px 24px;
+    }
+
+    .quote-box blockquote {
+        font-size: 1.35rem;
+        line-height: 1.5;
+    }
+
+    .contact-grid {
+        gap: 26px;
+    }
+
+    .contact-info {
+        padding: 0;
+    }
+
+    .contact-list {
+        gap: 12px;
+    }
+
+    .qr-card img {
+        width: clamp(170px, 55vw, 220px);
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        width: min(calc(100% - 24px), var(--container));
+    }
+
+    .hero {
+        padding: 98px 0 52px;
+    }
+
+    .hero h1 {
+        font-size: clamp(2rem, 9vw, 3.2rem);
+        line-height: 1.02;
+    }
+
+    .hero h1 .name-line {
+        white-space: normal;
+        font-size: clamp(2.25rem, 10vw, 3.6rem);
+        line-height: 0.95;
+    }
+
+    .hero h1 .title-line {
+        font-size: 0.9rem;
+    }
+
+    .hero-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+    }
+
+    .btn {
+        min-height: 52px;
+        padding: 0 20px;
+        font-size: 0.84rem;
+        letter-spacing: 0.05em;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn,
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .hero-image .image-frame {
+        width: 100%;
+        max-width: 360px;
+        padding: 12px;
+        border-radius: 28px;
+    }
+
+    .image-frame::before {
+        inset: 9px;
+        border-radius: 20px;
+    }
+
+    .image-frame img {
+        border-radius: 18px;
+    }
+
+    .section-heading h2,
+    .vision-box h2,
+    .contact-info h2,
+    .strategy-content h2 {
+        font-size: clamp(1.7rem, 7vw, 2.2rem);
+    }
+
+    .strategy-image {
+        grid-template-columns: 1fr;
+    }
+
+    .strategy-image .small-frame {
+        aspect-ratio: 16 / 10;
+    }
+
+    .style-tags {
+        gap: 10px;
+    }
+
+    .style-tags span {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 10px 14px;
+    }
+
+    .social a {
+        width: 46px;
+        height: 46px;
+    }
+
+    .footer {
+        padding: 24px 0 28px;
+    }
+}
+
+@media (max-width: 420px) {
+    .container {
+        width: min(calc(100% - 20px), var(--container));
+    }
+
+    .hero {
+        padding-top: 92px;
+    }
+
+    .hero h1 .intro-line {
+        font-size: 0.8rem;
+        letter-spacing: 0.16em;
+    }
+
+    .hero-desc,
+    p,
+    .contact-list li {
+        font-size: 0.94rem;
+    }
+
+    .about-text,
+    .about-card,
+    .style-box,
+    .vision-box,
+    .quote-box,
+    .qr-card,
+    .value-card,
+    .strategy-item {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .quote-box blockquote {
+        font-size: 1.2rem;
+    }
+
+    .qr-card img {
+        width: min(100%, 190px);
+    }
+}
