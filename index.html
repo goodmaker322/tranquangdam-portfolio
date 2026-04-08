@@ -3,326 +3,1602 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trần Quang Đam | Chuyên viên tư vấn bất động sản</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Trần Quang Đam · Giải pháp Bất động sản Cá nhân hóa</title>
 
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="damtq.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --jade-deep: #0d2a2a;
+            --jade-royal: #1a4a4a;
+            --jade-glow: #2d6a6a;
+            --jade-light: #3a8a8a;
+            --gold-silver: #c4b59a;
+            --gold-silver-light: #d4c8b2;
+            --gold-silver-dark: #9a8a70;
+            --platinum: #e8e4db;
+            --pearl: #f5f2ec;
+            --bg-dark: #0a1a1c;
+            --bg-deep: #071515;
+            --transition-smooth: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0d1f1f 50%, var(--bg-deep) 100%);
+            color: var(--platinum);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1,
+        h2,
+        h3,
+        h4,
+        .serif,
+        .cover-name,
+        .section-title,
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+            color: var(--pearl);
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 15px rgba(26, 74, 74, 0.3);
+        }
+
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold-silver), var(--jade-glow), transparent);
+        }
+
+        /* ===== LAYOUT ===== */
+        .content-layer {
+            position: relative;
+            z-index: 5;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 clamp(1.2rem, 5vw, 5rem);
+        }
+
+        /* ===== POPUP STYLES ===== */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding: 1rem;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-container {
+            background: linear-gradient(145deg, #0d2424, #071818);
+            border: 1px solid var(--gold-silver);
+            box-shadow:
+                0 40px 80px -20px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(196, 181, 154, 0.3),
+                inset 0 0 50px rgba(58, 138, 138, 0.1);
+            max-width: 480px;
+            width: 100%;
+            padding: clamp(2rem, 6vw, 3rem);
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 2px;
+        }
+
+        .popup-overlay.active .popup-container {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--gold-silver);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .popup-close:hover {
+            border-color: var(--gold-silver);
+            background: rgba(196, 181, 154, 0.1);
+            color: var(--gold-silver-light);
+            transform: rotate(90deg);
+        }
+
+        .popup-icon {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .popup-icon i {
+            font-size: 3.5rem;
+            color: var(--gold-silver);
+            background: linear-gradient(145deg, #1a3a3a, #0f2a2a);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 1px solid var(--gold-silver);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+            color: var(--pearl);
+            text-align: center;
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .popup-subtitle {
+            text-align: center;
+            color: var(--platinum);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .popup-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .popup-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 2px;
+            cursor: pointer;
+            border: 1px solid;
+        }
+
+        .popup-btn-primary {
+            background: linear-gradient(145deg, var(--gold-silver), var(--gold-silver-dark));
+            color: var(--bg-deep);
+            border-color: var(--gold-silver);
+            box-shadow: 0 10px 25px rgba(196, 181, 154, 0.2);
+        }
+
+        .popup-btn-primary:hover {
+            background: linear-gradient(145deg, var(--gold-silver-light), var(--gold-silver));
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(196, 181, 154, 0.3);
+            color: #000;
+        }
+
+        .popup-btn-secondary {
+            background: transparent;
+            color: var(--gold-silver);
+            border-color: var(--gold-silver);
+        }
+
+        .popup-btn-secondary:hover {
+            background: rgba(196, 181, 154, 0.1);
+            border-color: var(--gold-silver-light);
+            color: var(--gold-silver-light);
+            transform: translateY(-2px);
+        }
+
+        .popup-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--jade-glow);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* Trigger buttons */
+        .popup-trigger-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--gold-silver);
+            color: var(--gold-silver);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            border-radius: 2px;
+        }
+
+        .popup-trigger-btn:hover {
+            background: var(--gold-silver);
+            color: var(--bg-deep);
+            transform: translateY(-2px);
+        }
+
+        /* Animation cho popup xuất hiện tự động */
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(196, 181, 154, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(196, 181, 154, 0.4);
+            }
+        }
+
+        .popup-container {
+            animation: pulseGlow 3s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .popup-container {
+                padding: 1.8rem;
+            }
+
+            .popup-icon i {
+                width: 60px;
+                height: 60px;
+                font-size: 2.5rem;
+            }
+
+            .popup-btn {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        section {
+            position: relative;
+            padding: clamp(4rem, 10vw, 7rem) 0;
+            overflow: hidden;
+        }
+
+        .bg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.25;
+        }
+
+        /* ===== HEADER ===== */
+        .luxury-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.2rem clamp(1rem, 5vw, 5rem);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(25px);
+            background: rgba(10, 26, 26, 0.75);
+            border-bottom: 1px solid rgba(196, 181, 154, 0.15);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-logo {
+            font-size: clamp(1.6rem, 4vw, 2rem);
+            font-weight: 600;
+            color: var(--pearl);
+            letter-spacing: 5px;
+            text-shadow: 0 0 25px rgba(58, 138, 138, 0.4);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: clamp(1.5rem, 4vw, 3.5rem);
+        }
+
+        .nav-links a {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--platinum);
+            text-decoration: none;
+            padding-bottom: 5px;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-silver-light);
+            border-bottom: 1px solid var(--gold-silver);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 1.5px;
+            background: var(--gold-silver);
+            transition: var(--transition-smooth);
+        }
+
+        .mobile-menu-btn.active .hamburger span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .mobile-menu-btn.active .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active .hamburger span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(80%, 350px);
+            height: 100vh;
+            background: linear-gradient(135deg, #0d2424 0%, #071818 100%);
+            backdrop-filter: blur(30px);
+            z-index: 999;
+            padding: 100px 2rem 2rem;
+            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            border-left: 1px solid var(--gold-silver);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--pearl);
+            text-decoration: none;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(196, 181, 154, 0.15);
+            transition: var(--transition-smooth);
+            letter-spacing: 2px;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--gold-silver);
+            padding-left: 15px;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== FOOTER ===== */
+        .prestige-footer {
+            background: linear-gradient(180deg, #0a1a1a 0%, #051010 100%);
+            border-top: 1px solid var(--gold-silver);
+            padding: 2.5rem clamp(1rem, 5vw, 5rem);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: var(--gold-silver);
+        }
+
+        /* ===== COVER ===== */
+        .cover-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0d2424 0%, #061010 50%, #020808 100%);
+            position: relative;
+        }
+
+        .cover-layer-deco {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 70%;
+            height: 90%;
+            background: radial-gradient(circle at 70% 50%, rgba(58, 138, 138, 0.12) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 5vw, 5rem);
+        }
+
+        .cover-pre-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            letter-spacing: clamp(6px, 2vw, 12px);
+            text-transform: uppercase;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            color: var(--gold-silver);
+            margin-bottom: 1.5rem;
+            animation: softGlow 3s infinite;
+        }
+
+        .cover-name {
+            font-size: clamp(3.5rem, 10vw, 6.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            color: var(--pearl);
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 30px rgba(26, 74, 74, 0.5);
+        }
+
+        .cover-title {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold-silver-light);
+        }
+
+        .cover-years {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.8rem, 2.5vw, 1.1rem);
+            letter-spacing: clamp(4px, 2vw, 10px);
+            color: var(--jade-glow);
+            border-top: 1px solid rgba(196, 181, 154, 0.4);
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            display: inline-block;
+        }
+
+        @keyframes softGlow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px rgba(58, 138, 138, 0.3);
+            }
+
+            50% {
+                text-shadow: 0 0 35px rgba(58, 138, 138, 0.5);
+            }
+        }
+
+        /* ===== EXECUTIVE ===== */
+        .exec-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.9fr;
+            gap: clamp(2rem, 5vw, 5rem);
+            align-items: center;
+        }
+
+        .exec-quote {
+            font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--pearl);
+            margin-bottom: 1.8rem;
+            border-left: 3px solid var(--gold-silver);
+            padding-left: 1.8rem;
+        }
+
+        .exec-text {
+            color: var(--platinum);
+            margin-bottom: 1.2rem;
+            font-weight: 300;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* ===== MILESTONES ===== */
+        .timeline-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .milestone-card {
+            background: rgba(15, 35, 35, 0.5);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(196, 181, 154, 0.2);
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            flex: 1 1 280px;
+            transition: var(--transition-smooth);
+            border-radius: 2px;
+            color: var(--platinum);
+        }
+
+        .milestone-card:hover {
+            border-color: var(--gold-silver);
+            background: rgba(26, 55, 55, 0.6);
+            transform: translateY(-5px);
+        }
+
+        .milestone-year {
+            font-size: clamp(2.5rem, 6vw, 3.8rem);
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold-silver);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-title {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            margin: 0.8rem 0;
+            color: var(--pearl);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* ===== COMPETENCIES ===== */
+        .comp-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(1.5rem, 4vw, 2.5rem);
+        }
+
+        .comp-item {
+            border-bottom: 1px solid rgba(196, 181, 154, 0.2);
+            padding-bottom: 1.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .comp-item:hover {
+            border-bottom-color: var(--gold-silver);
+        }
+
+        .comp-item h4 {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold-silver-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .comp-item p {
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            color: var(--platinum);
+        }
+
+        /* ===== PORTFOLIO & IMAGE FRAMES ===== */
+        .portfolio-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+            background: rgba(10, 30, 30, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 181, 154, 0.15);
+            padding: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .project-card:hover {
+            border-color: var(--gold-silver);
+        }
+
+        .project-details {
+            padding: clamp(1.5rem, 4vw, 2.5rem) 2rem 2rem 0;
+        }
+
+        .project-name {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--pearl);
+            margin-bottom: 0.8rem;
+        }
+
+        .badge {
+            color: var(--gold-silver);
+            font-size: clamp(0.7rem, 2vw, 0.85rem);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Image Frames */
+        .frame-museum,
+        .frame-float,
+        .frame-arch,
+        .frame-classic,
+        .frame-gallery {
+            width: 100%;
+            height: 100%;
+        }
+
+        .frame-museum {
+            position: relative;
+            padding: 10px;
+            background: linear-gradient(145deg, #1a2a2a, #0f1f1f);
+            box-shadow: 0 30px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--gold-silver), inset 0 0 0 1px rgba(196, 181, 154, 0.2);
+            transition: var(--transition-smooth);
+        }
+
+        .frame-museum::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid rgba(196, 181, 154, 0.3);
+            pointer-events: none;
+        }
+
+        .frame-museum img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(1.02) contrast(1.05);
+        }
+
+        .frame-float {
+            position: relative;
+            box-shadow: 25px 25px 40px -10px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(196, 181, 154, 0.15);
+        }
+
+        .frame-float::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            width: 100%;
+            height: 100%;
+            border-right: 2px solid var(--gold-silver);
+            border-bottom: 2px solid var(--gold-silver);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .frame-arch {
+            position: relative;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 90% 100%, 0% 100%);
+            box-shadow: 20px 20px 30px -10px #00000060;
+        }
+
+        .frame-arch::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, rgba(58, 138, 138, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .frame-classic {
+            position: relative;
+            padding: 8px;
+            background: linear-gradient(145deg, #1a2a2a, #0f1f1f);
+            box-shadow: 0 25px 35px -10px #000, 0 0 0 1px var(--gold-silver);
+        }
+
+        .frame-classic .corner-accent {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-style: solid;
+            border-color: var(--gold-silver);
+            opacity: 0.8;
+        }
+
+        .frame-classic .tl {
+            top: -2px;
+            left: -2px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .frame-classic .tr {
+            top: -2px;
+            right: -2px;
+            border-width: 2px 2px 0 0;
+        }
+
+        .frame-classic .bl {
+            bottom: -2px;
+            left: -2px;
+            border-width: 0 0 2px 2px;
+        }
+
+        .frame-classic .br {
+            bottom: -2px;
+            right: -2px;
+            border-width: 0 2px 2px 0;
+        }
+
+        .frame-gallery {
+            position: relative;
+            padding: 14px 14px 18px 14px;
+            background: linear-gradient(145deg, #152525, #0a1818);
+            box-shadow: inset 0 0 30px #0000004d, 15px 20px 25px -10px #000;
+            border: 1px solid var(--gold-silver);
+        }
+
+        .frame-gallery::after {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid rgba(196, 181, 154, 0.25);
+        }
+
+        .frame-float img,
+        .frame-arch img,
+        .frame-classic img,
+        .frame-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-minimal {
+            text-align: center;
+            background: rgba(10, 30, 30, 0.35);
+            backdrop-filter: blur(15px);
+            padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 5vw, 3rem);
+            border: 1px solid rgba(196, 181, 154, 0.25);
+            border-radius: 2px;
+        }
+
+        .contact-details {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-family: 'Cormorant Garamond', serif;
+            word-spacing: 6px;
+            color: var(--pearl);
+        }
+
+        .contact-link {
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: var(--platinum);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            display: inline-block;
+            border-bottom: 1px solid transparent;
+        }
+
+        .contact-link:hover {
+            color: var(--gold-silver) !important;
+            border-bottom: 1px solid var(--gold-silver) !important;
+        }
+
+        .address-link {
+            color: var(--gold-silver);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            display: inline-block;
+            border-bottom: 1px dotted var(--gold-silver);
+        }
+
+        .address-link:hover {
+            color: var(--gold-silver-light) !important;
+            border-bottom: 1px solid var(--gold-silver-light) !important;
+        }
+
+        /* ===== REVEAL ANIMATION ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.9, 0.1, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .gold-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-silver), var(--jade-glow), transparent);
+            width: 100%;
+            margin: 2rem 0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .exec-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comp-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                grid-template-columns: 1fr;
+            }
+
+            .project-details {
+                padding: 0 1.5rem 1.5rem 1.5rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .exec-grid {
+                gap: 2.5rem;
+            }
+
+            .project-card {
+                gap: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <header class="navbar">
-        <div class="container nav-content">
-            <a href="#home" class="logo">TQD</a>
-
-            <nav class="nav-menu">
-                <a href="#about">Giới thiệu</a>
-                <a href="#value">Giá trị</a>
-                <a href="#style">Phong cách</a>
-                <a href="#contact">Liên hệ</a>
-            </nav>
-
-            <button class="menu-toggle" aria-label="Mở menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+    <!-- HEADER -->
+    <header class="luxury-header">
+        <div class="nav-logo">T.Q.D</div>
+        <div class="nav-links">
+            <a href="#home">Trang bìa</a>
+            <a href="#exec">Tầm nhìn</a>
+            <a href="#milestones">Dấu ấn</a>
+            <a href="#portfolio">Bộ sưu tập</a>
+            <a href="#contact">Liên hệ</a>
         </div>
+        <button class="mobile-menu-btn" aria-label="Menu">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
     </header>
 
-    <!-- Hero -->
-    <section id="home" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-grid">
-            <div class="hero-content reveal">
-                <p class="hero-label">Chuyên viên Tư vấn Bất động sản</p>
-                <h1>
-                    <span class="intro-line">TÔI LÀ</span>
-                    <span class="name-line">TRẦN QUANG ĐAM</span>
-                    <span class="title-line">CHUYÊN VIÊN TƯ VẤN BẤT ĐỘNG SẢN</span>
-                </h1>
-                <p class="hero-desc">
-                    Tôi theo đuổi phong cách tư vấn chuyên nghiệp, chuẩn mực và định hướng giá trị dài hạn,
-                    kết hợp tinh thần của thế hệ mới với sự thận trọng cần thiết để đồng hành cùng khách hàng
-                    trong những quyết định bất động sản quan trọng.
-                </p>
+    <!-- MOBILE MENU -->
+    <div class="menu-overlay"></div>
+    <div class="mobile-menu">
+        <a href="#home" class="mobile-link">Trang bìa</a>
+        <a href="#exec" class="mobile-link">Tầm nhìn</a>
+        <a href="#milestones" class="mobile-link">Dấu ấn</a>
+        <a href="#portfolio" class="mobile-link">Bộ sưu tập</a>
+        <a href="#contact" class="mobile-link">Liên hệ</a>
+    </div>
 
-                <div class="hero-meta">
-                    <div class="meta-item">
-                        <strong>Thế hệ mới</strong>
-                        <span>Tư duy linh hoạt</span>
-                    </div>
-                    <div class="meta-item">
-                        <strong>Chuẩn mực</strong>
-                        <span>Phong cách chuyên nghiệp</span>
-                    </div>
-                    <div class="meta-item">
-                        <strong>Dài hạn</strong>
-                        <span>Định hướng giá trị bền vững</span>
-                    </div>
+    <!-- COVER -->
+    <section id="home" class="cover-section">
+        <div class="cover-layer-deco"></div>
+        <div class="cover-content">
+            <div class="cover-pre-title">Chuyên viên Tư vấn Bất động sản Cao cấp</div>
+            <h1 class="cover-name">TRẦN QUANG<br>ĐAM</h1>
+            <div class="cover-title">Giải pháp Cá nhân hóa · Góc nhìn Thế hệ Mới</div>
+            <div class="cover-years">ĐỒNG HÀNH CÙNG KHÁCH HÀNG KIẾN TẠO GIÁ TRỊ BỀN VỮNG</div>
+        </div>
+    </section>
+
+    <!-- EXECUTIVE SUMMARY -->
+    <section id="exec">
+        <div class="content-layer reveal">
+            <h2 class="section-title">Triết lý & Tầm nhìn</h2>
+            <div class="exec-grid">
+                <div>
+                    <div class="exec-quote">"Mỗi khách hàng là một câu chuyện riêng. Tôi ở đây để lắng nghe, thấu hiểu
+                        và kiến tạo giải pháp bất động sản được cá nhân hóa một cách chỉn chu nhất."</div>
+                    <p class="exec-text">Là một chuyên viên trẻ thuộc thế hệ mới, tôi kết hợp giữa tư duy phân tích sắc
+                        bén, nền tảng kiến thức bài bản và sự nhạy bén với xu hướng thị trường. Tôi không chỉ đơn thuần
+                        là người môi giới, mà là người đồng hành chiến lược, giúp khách hàng định hình và hiện thực hóa
+                        những mục tiêu tài sản một cách an toàn và hiệu quả.</p>
+                    <p class="exec-text">Với tinh thần cầu thị và sự chuyên nghiệp tuyệt đối, tôi cam kết mang đến trải
+                        nghiệm dịch vụ minh bạch, tận tâm và khác biệt, đặt lợi ích và sự hài lòng của khách hàng làm
+                        trọng tâm trong mọi quyết định.</p>
                 </div>
-
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Đặt lịch tư vấn</a>
-                    <a href="#about" class="btn btn-outline">Tìm hiểu thêm</a>
+                <div class="frame-museum">
+                    <img src="toiladam.jpg" alt="Trần Quang Đam - Chuyên viên Tư vấn"
+                        style="width:100%; aspect-ratio:3/4;">
                 </div>
             </div>
+        </div>
+        <div class="bg-layer"
+            style="background: radial-gradient(circle at 80% 20%, rgba(58, 138, 138, 0.15), transparent 70%);"></div>
+    </section>
 
-            <div class="hero-image reveal">
-                <div class="image-frame">
-                    <img src="toiladam.jpg" alt="Trần Quang Đam">
+    <!-- MILESTONES -->
+    <section id="milestones" style="background: linear-gradient(180deg, #0a1f1f 0%, #0d2424 100%);">
+        <div class="content-layer reveal">
+            <h2 class="section-title">Dấu ấn & Kinh nghiệm</h2>
+            <div
+                style="margin-bottom: 2rem; font-size: clamp(0.9rem, 3vw, 1.2rem); letter-spacing: 5px; color: var(--gold-silver);">
+                NỀN TẢNG VỮNG CHẮC · TƯ DUY ĐỘT PHÁ
+            </div>
+            <div class="timeline-container">
+                <div class="milestone-card">
+                    <div class="milestone-year">3+ Năm</div>
+                    <div class="milestone-title">Kinh nghiệm Thực chiến</div>
+                    <p>Trực tiếp tư vấn và đồng hành cùng hơn 50 khách hàng trong các giao dịch bất động sản cao cấp, từ
+                        căn hộ hạng sang đến biệt thự nghỉ dưỡng. Am hiểu sâu sắc quy trình và pháp lý.</p>
+                </div>
+                <div class="milestone-card">
+                    <div class="milestone-year">Chuyên sâu</div>
+                    <div class="milestone-title">Phân tích & Cá nhân hóa</div>
+                    <p>Ứng dụng các công cụ phân tích dữ liệu thị trường để xây dựng chiến lược đầu tư phù hợp với khẩu
+                        vị rủi ro và mục tiêu tài chính riêng biệt của từng khách hàng.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-heading reveal">
-                <p class="section-label">Giới thiệu</p>
-                <h2>Một góc nhìn thế hệ mới trong tư vấn bất động sản</h2>
-            </div>
-
-            <div class="about-grid">
-                <div class="about-text reveal">
-                    <p>
-                        Tôi là <strong>Trần Quang Đam</strong> – một chuyên viên tư vấn bất động sản theo đuổi
-                        phong cách làm việc <strong>chỉn chu, chuẩn mực và định hướng dài hạn</strong>.
-                    </p>
-
-                    <p>
-                        Tôi tin rằng, trong một thị trường luôn vận động, sự chuyên nghiệp không chỉ đến từ kiến thức,
-                        mà còn đến từ khả năng <strong>lắng nghe, phân tích và thích nghi đúng lúc</strong>.
-                    </p>
-
-                    <p>
-                        Là một người trẻ, tôi luôn chủ động cập nhật những chuyển động mới của thị trường, đồng thời
-                        trân trọng những giá trị kinh nghiệm đã được kiểm chứng theo thời gian để tạo nên một cách tiếp
-                        cận
-                        vừa mới mẻ, vừa vững vàng.
-                    </p>
+    <!-- CORE COMPETENCIES -->
+    <section>
+        <div class="content-layer reveal">
+            <h2 class="section-title">Năng lực cốt lõi</h2>
+            <div class="comp-grid">
+                <div class="comp-item">
+                    <h4>Lắng nghe & Thấu hiểu</h4>
+                    <p>Dành thời gian để hiểu rõ nhu cầu, mong muốn và cả những băn khoăn của khách hàng, từ đó đưa ra
+                        lời khuyên chính xác và phù hợp nhất.</p>
                 </div>
-
-                <div class="about-card reveal">
-                    <h3>Tôi không chỉ giới thiệu sản phẩm</h3>
-                    <p>
-                        Tôi hướng đến vai trò của một <strong>người đồng hành tư vấn</strong>, cùng khách hàng nhìn nhận
-                        bất động sản như một phần của chiến lược tài sản dài hạn.
-                    </p>
-                    <p>
-                        Trong mỗi quá trình làm việc, tôi tập trung vào những câu hỏi cốt lõi:
-                    </p>
-
-                    <ul class="check-list">
-                        <li>Sản phẩm này có thực sự phù hợp với nhu cầu và mục tiêu của khách hàng hay không?</li>
-                        <li>Giá trị thực, tiềm năng và rủi ro của sản phẩm nằm ở đâu?</li>
-                        <li>Đâu là thời điểm và phương án phù hợp nhất để đưa ra quyết định?</li>
-                    </ul>
+                <div class="comp-item">
+                    <h4>Phân tích & Định giá</h4>
+                    <p>Sử dụng dữ liệu thị trường và công cụ chuyên môn để đánh giá chính xác tiềm năng tăng trưởng và
+                        giá trị thực của bất động sản.</p>
+                </div>
+                <div class="comp-item">
+                    <h4>Đàm phán & Giao dịch</h4>
+                    <p>Kỹ năng đàm phán chuyên nghiệp, đảm bảo tối ưu hóa lợi ích cho khách hàng trong mọi giao dịch,
+                        đảm bảo an toàn pháp lý tuyệt đối.</p>
+                </div>
+                <div class="comp-item">
+                    <h4>Đồng hành & Hậu mãi</h4>
+                    <p>Mối quan hệ không kết thúc sau giao dịch. Tôi luôn sẵn sàng hỗ trợ khách hàng trong các vấn đề
+                        quản lý và khai thác tài sản sau đầu tư.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Value -->
-    <section id="value" class="section section-dark">
-        <div class="container">
-            <div class="section-heading reveal">
-                <p class="section-label">Giá trị mang lại</p>
-                <h2>Những giá trị tôi mong muốn mang đến cho khách hàng</h2>
-            </div>
+    <!-- PORTFOLIO -->
+    <!-- PORTFOLIO SECTION với 4 DỰ ÁN VINHOMES MỚI -->
+    <section id="portfolio" style="background: linear-gradient(135deg, #0a1f1f 0%, #0d2424 100%);">
+        <div class="content-layer reveal">
+            <h2 class="section-title">Bộ sưu tập dự án tiêu biểu</h2>
+            <div class="portfolio-showcase">
 
-            <div class="value-grid">
-                <article class="value-card reveal">
-                    <span class="value-number">01</span>
-                    <h3>Tư duy mới mẻ nhưng có chọn lọc</h3>
-                    <p>
-                        Tôi tiếp cận thị trường với tinh thần cởi mở, luôn cập nhật xu hướng và dữ liệu mới, nhưng vẫn
-                        giữ sự tỉnh táo để chọn lọc những giá trị thực sự phù hợp với khách hàng.
-                    </p>
-                </article>
-
-                <article class="value-card reveal">
-                    <span class="value-number">02</span>
-                    <h3>Sự chuyên nghiệp trong từng chi tiết</h3>
-                    <p>
-                        Từ cách lắng nghe nhu cầu, phân tích sản phẩm đến quá trình đồng hành, tôi luôn ưu tiên sự rõ
-                        ràng, chuẩn mực và trách nhiệm trong từng bước làm việc.
-                    </p>
-                </article>
-
-                <article class="value-card reveal">
-                    <span class="value-number">03</span>
-                    <h3>Khả năng thích nghi với thị trường</h3>
-                    <p>
-                        Tôi luôn sẵn sàng học hỏi, điều chỉnh góc nhìn và cập nhật kiến thức mới để mỗi giải pháp đưa ra
-                        đều phù hợp với bối cảnh thị trường ở thời điểm hiện tại.
-                    </p>
-                </article>
-
-                <article class="value-card reveal">
-                    <span class="value-number">04</span>
-                    <h3>Định hướng giá trị dài hạn</h3>
-                    <p>
-                        Tôi không hướng khách hàng đến những quyết định vội vàng, mà tập trung vào những lựa chọn có nền
-                        tảng, phù hợp với mục tiêu bền vững và chiến lược tài sản lâu dài.
-                    </p>
-                </article>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Strategy -->
-    <section class="section">
-        <div class="container strategy-grid">
-            <div class="strategy-image reveal">
-                <div class="image-frame small-frame">
-                    <img src="vinhomes-cangio.webp" alt="Hình ảnh tư vấn bất động sản">
-                </div>
-                <div class="image-frame small-frame">
-                    <img src="banner-vinhomes-hai-van-bay.jpg" alt="Hình ảnh tư vấn bất động sản">
-                </div>
-                <div class="image-frame small-frame">
-                    <img src="vin-halongxanh.jpg" alt="Hình ảnh tư vấn bất động sản">
-                </div>
-                <div class="image-frame small-frame">
-                    <img src="vin-coloa.jpg" alt="Hình ảnh tư vấn bất động sản">
-                </div>
-            </div>
-
-            <div class="strategy-content reveal">
-                <p class="section-label">Định hướng tư vấn</p>
-                <h2>Giải pháp được xây dựng trên sự thấu hiểu và phù hợp</h2>
-
-                <div class="strategy-list">
-                    <div class="strategy-item">
-                        <h3>Lắng nghe để hiểu đúng</h3>
-                        <p>Tôi bắt đầu bằng việc thấu hiểu nhu cầu thực tế, mục tiêu và mối quan tâm của từng khách hàng
-                            trước khi đưa ra bất kỳ đề xuất nào.</p>
+                <!-- DỰ ÁN 1: VINHOMES GREEN PARADISE CẦN GIỜ - ĐANG CHẠY -->
+                <div class="project-card">
+                    <div class="frame-float" style="position: relative;">
+                        <img src="vh-cangio.jpg" alt="Vinhomes Green Paradise Cần Giờ">
+                        <!-- TAG TRẠNG THÁI TRÊN ẢNH -->
+                        <span style="
+                            position: absolute;
+                            top: 15px;
+                            left: 15px;
+                            background: linear-gradient(135deg, #1e90ff, #00bfff);
+                            color: white;
+                            font-family: 'Inter', sans-serif;
+                            font-size: 0.7rem;
+                            font-weight: 500;
+                            letter-spacing: 2px;
+                            text-transform: uppercase;
+                            padding: 6px 14px;
+                            border-radius: 2px;
+                            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+                            backdrop-filter: blur(5px);
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            z-index: 10;
+                        ">
+                            <i class="fas fa-play-circle" style="margin-right: 6px; font-size: 0.65rem;"></i> ĐANG CHẠY
+                        </span>
                     </div>
-
-                    <div class="strategy-item">
-                        <h3>Phân tích để chọn đúng</h3>
-                        <p>Mỗi phương án đều được cân nhắc trên nhiều yếu tố: giá trị sản phẩm, tính phù hợp, tiềm năng
-                            và mức độ an toàn trong dài hạn.</p>
-                    </div>
-
-                    <div class="strategy-item">
-                        <h3>Đồng hành để đi xa</h3>
-                        <p>Tôi mong muốn xây dựng mối quan hệ bền vững, nơi khách hàng không chỉ nhận được một tư vấn,
-                            mà còn có một người đồng hành đáng tin cậy.</p>
+                    <div class="project-details">
+                        <div class="badge" style="display: flex; align-items: center; gap: 10px;">
+                            <span>Vinhomes Green Paradise</span>
+                            <span style="
+                                background: #1e90ff20;
+                                color: #1e90ff;
+                                padding: 2px 10px;
+                                border-radius: 2px;
+                                font-size: 0.65rem;
+                                letter-spacing: 2px;
+                                border: 1px solid #1e90ff40;
+                            ">● ĐANG MỞ BÁN</span>
+                        </div>
+                        <div class="project-name">Green Paradise Cần Giờ</div>
+                        <p style="margin: 1rem 0; color: var(--platinum); font-size: clamp(0.85rem, 2vw, 0.95rem);">
+                            Khu đô thị sinh thái biển đầu tiên tại Cần Giờ. Cơ hội đầu tư giai đoạn đầu với tiềm năng
+                            tăng
+                            trưởng vượt trội. Đang nhận booking ưu tiên.
+                        </p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Working Style -->
-    <section id="style" class="section section-dark">
-        <div class="container">
-            <div class="section-heading reveal">
-                <p class="section-label">Phong cách làm việc</p>
-                <h2>Những nguyên tắc tôi luôn gìn giữ trong từng tư vấn</h2>
-            </div>
-
-            <div class="style-box reveal">
-                <div class="style-tags">
-                    <span>Chuẩn mực</span>
-                    <span>Tận tâm</span>
-                    <span>Minh bạch</span>
-                    <span>Linh hoạt</span>
-                    <span>Định hướng dài hạn</span>
+                <!-- DỰ ÁN 2: VINHOMES HẢI VÂN BAY - ĐANG CHẠY -->
+                <div class="project-card">
+                    <div class="frame-arch" style="position: relative;">
+                        <img src="vh-haivanbay.jpg" alt="Vinhomes Hải Vân Bay">
+                        <!-- TAG TRẠNG THÁI TRÊN ẢNH -->
+                        <span style="
+                            position: absolute;
+                            top: 15px;
+                            left: 15px;
+                            background: linear-gradient(135deg, #1e90ff, #00bfff);
+                            color: white;
+                            font-family: 'Inter', sans-serif;
+                            font-size: 0.7rem;
+                            font-weight: 500;
+                            letter-spacing: 2px;
+                            text-transform: uppercase;
+                            padding: 6px 14px;
+                            border-radius: 2px;
+                            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+                            backdrop-filter: blur(5px);
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            z-index: 10;
+                        ">
+                            <i class="fas fa-play-circle" style="margin-right: 6px; font-size: 0.65rem;"></i> ĐANG CHẠY
+                        </span>
+                    </div>
+                    <div class="project-details">
+                        <div class="badge" style="display: flex; align-items: center; gap: 10px;">
+                            <span>Vinhomes Hải Vân Bay</span>
+                            <span style="
+                                background: #1e90ff20;
+                                color: #1e90ff;
+                                padding: 2px 10px;
+                                border-radius: 2px;
+                                font-size: 0.65rem;
+                                letter-spacing: 2px;
+                                border: 1px solid #1e90ff40;
+                            ">● ĐANG MỞ BÁN</span>
+                        </div>
+                        <div class="project-name">Hải Vân Bay Đà Nẵng</div>
+                        <p style="margin: 1rem 0; color: var(--platinum); font-size: clamp(0.85rem, 2vw, 0.95rem);">
+                            Quần thể nghỉ dưỡng đẳng cấp bậc nhất miền Trung, tọa lạc tại vị trí "đắc địa" bên vịnh Đà
+                            Nẵng.
+                            Sản phẩm giới hạn, chính sách chiết khấu hấp dẫn.
+                        </p>
+                    </div>
                 </div>
 
-                <p>
-                    Tôi tin rằng sự chuyên nghiệp được thể hiện qua cách làm việc nhất quán, thái độ cầu thị
-                    và trách nhiệm trong từng chi tiết. Vì vậy, tôi luôn lựa chọn cách tiếp cận mềm mại nhưng rõ ràng,
-                    lắng nghe kỹ lưỡng nhưng vẫn giữ được chính kiến cần thiết để mang đến cho khách hàng những tư vấn
-                    phù hợp và đáng tin cậy.
-                </p>
+                <!-- DỰ ÁN 3: VINHOMES HẠ LONG XANH - ĐANG CHỜ -->
+                <div class="project-card">
+                    <div class="frame-classic" style="position: relative;">
+                        <div class="corner-accent tl"></div>
+                        <div class="corner-accent tr"></div>
+                        <div class="corner-accent bl"></div>
+                        <div class="corner-accent br"></div>
+                        <img src="vh-halongxanh.jpg" alt="Vinhomes Hạ Long Xanh">
+                        <!-- TAG TRẠNG THÁI TRÊN ẢNH -->
+                        <span style="
+                            position: absolute;
+                            top: 15px;
+                            left: 15px;
+                            background: linear-gradient(135deg, #daa520, #ffd700);
+                            color: #1a1a1a;
+                            font-family: 'Inter', sans-serif;
+                            font-size: 0.7rem;
+                            font-weight: 600;
+                            letter-spacing: 2px;
+                            text-transform: uppercase;
+                            padding: 6px 14px;
+                            border-radius: 2px;
+                            box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+                            backdrop-filter: blur(5px);
+                            border: 1px solid rgba(255, 255, 255, 0.3);
+                            z-index: 10;
+                        ">
+                            <i class="fas fa-clock" style="margin-right: 6px; font-size: 0.65rem;"></i> ĐANG CHỜ
+                        </span>
+                    </div>
+                    <div class="project-details">
+                        <div class="badge" style="display: flex; align-items: center; gap: 10px;">
+                            <span>Vinhomes Hạ Long Xanh</span>
+                            <span style="
+                                background: #daa52020;
+                                color: #daa520;
+                                padding: 2px 10px;
+                                border-radius: 2px;
+                                font-size: 0.65rem;
+                                letter-spacing: 2px;
+                                border: 1px solid #daa52040;
+                            ">● SẮP RA MẮT</span>
+                        </div>
+                        <div class="project-name">Hạ Long Xanh</div>
+                        <p style="margin: 1rem 0; color: var(--platinum); font-size: clamp(0.85rem, 2vw, 0.95rem);">
+                            Siêu dự án đô thị - du lịch tại Quảng Ninh với quy mô hoành tráng. Đăng ký nhận thông tin
+                            sớm để
+                            có vị trí ưu tiên khi mở bán chính thức.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- DỰ ÁN 4: VINHOMES OLYMPIC - ĐANG CHỜ -->
+                <div class="project-card">
+                    <div class="frame-gallery" style="position: relative;">
+                        <img src="vh-olympic.jpg" alt="Vinhomes Olympic">
+                        <!-- TAG TRẠNG THÁI TRÊN ẢNH -->
+                        <span style="
+                            position: absolute;
+                            top: 15px;
+                            left: 15px;
+                            background: linear-gradient(135deg, #daa520, #ffd700);
+                            color: #1a1a1a;
+                            font-family: 'Inter', sans-serif;
+                            font-size: 0.7rem;
+                            font-weight: 600;
+                            letter-spacing: 2px;
+                            text-transform: uppercase;
+                            padding: 6px 14px;
+                            border-radius: 2px;
+                            box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+                            backdrop-filter: blur(5px);
+                            border: 1px solid rgba(255, 255, 255, 0.3);
+                            z-index: 10;
+                        ">
+                            <i class="fas fa-clock" style="margin-right: 6px; font-size: 0.65rem;"></i> ĐANG CHỜ
+                        </span>
+                    </div>
+                    <div class="project-details">
+                        <div class="badge" style="display: flex; align-items: center; gap: 10px;">
+                            <span>Vinhomes Olympic</span>
+                            <span style="
+                                background: #daa52020;
+                                color: #daa520;
+                                padding: 2px 10px;
+                                border-radius: 2px;
+                                font-size: 0.65rem;
+                                letter-spacing: 2px;
+                                border: 1px solid #daa52040;
+                            ">● SẮP RA MẮT</span>
+                        </div>
+                        <div class="project-name">Vinhomes Olympic</div>
+                        <p style="margin: 1rem 0; color: var(--platinum); font-size: clamp(0.85rem, 2vw, 0.95rem);">
+                            Dự án trọng điểm phía Tây Hà Nội, được quy hoạch đồng bộ với hệ thống tiện ích thể thao -
+                            giải
+                            trí đẳng cấp quốc tế. Tiềm năng tăng giá mạnh mẽ.
+                        </p>
+                    </div>
+                </div>
+
             </div>
+            <p
+                style="margin-top: 3rem; font-style: italic; color: var(--silver-gold); letter-spacing: 1px; font-size: clamp(0.8rem, 2vw, 0.95rem);">
+                * Liên hệ ngay để được tư vấn chi tiết và nhận chính sách ưu đãi riêng cho từng dự án.
+            </p>
         </div>
     </section>
 
-    <!-- Vision -->
-    <section class="section">
-        <div class="container">
-            <div class="vision-box reveal">
-                <p class="section-label">Tầm nhìn</p>
-                <h2>Xây dựng giá trị bằng tư duy mới và sự bền vững dài hạn</h2>
-                <p>
-                    Tôi hướng tới hình ảnh một chuyên viên tư vấn bất động sản thế hệ mới – năng động trong tư duy,
-                    chuẩn mực trong hành động và bền vững trong giá trị mang lại cho khách hàng.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quote -->
-    <section class="section section-dark">
-        <div class="container">
-            <div class="quote-box reveal">
-                <p class="section-label">Thông điệp</p>
-                <blockquote>
-                    “Trong một thị trường luôn biến động, điều quan trọng không phải là lựa chọn nhanh,
-                    mà là lựa chọn đúng và phù hợp với giá trị dài hạn.”
-                </blockquote>
-            </div>
-        </div>
-    </section>
-
-    <!-- QR + Contact -->
-    <section id="contact" class="section">
-        <div class="container contact-grid">
-            <div class="contact-info reveal">
-                <p class="section-label">Liên hệ</p>
-                <h2>Kết nối để bắt đầu một cuộc trao đổi giá trị</h2>
-                <p>
-                    Nếu bạn đang tìm kiếm một người đồng hành có tư duy rõ ràng, phong cách làm việc chuyên nghiệp
-                    và sự tận tâm trong từng tư vấn, tôi sẵn sàng cùng bạn xây dựng một định hướng bất động sản
-                    phù hợp, chỉn chu và hiệu quả.
-                </p>
-
-                <ul class="contact-list">
-                    <li><i class="fa-solid fa-phone"></i> 0914 805 823</li>
-                    <li><i class="fa-solid fa-envelope"></i> damtqhopnhatland@gmail.com</li>
-                    <li><i class="fa-solid fa-location-dot"></i> Tòa HH2 Bắc Hà - 15 Tố Hữu - Phường Thanh Xuân - Thành
-                        phố Hà Nội</li>
-                </ul>
-
-                <div class="social">
-                    <a href="https://web.facebook.com/profile.php?id=100044440710417"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="tel:0914805823">
-                        <i class="fa-solid fa-phone"></i>
-                    </a>
+    <!-- CAM KẾT -->
+    <section>
+        <div class="content-layer reveal">
+            <h2 class="section-title">Cam kết dịch vụ</h2>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap; justify-content: space-between;">
+                <div style="flex:1; min-width: 200px;">
+                    <h3
+                        style="font-family: 'Cormorant Garamond'; color: var(--gold-silver); font-size: clamp(1.3rem, 3vw, 1.6rem);">
+                        Minh bạch & Trung thực</h3>
+                    <p>Mọi thông tin về dự án, pháp lý và giá cả đều được cung cấp một cách rõ ràng, chính xác và đầy
+                        đủ.</p>
+                </div>
+                <div style="flex:1; min-width: 200px;">
+                    <h3
+                        style="font-family: 'Cormorant Garamond'; color: var(--gold-silver); font-size: clamp(1.3rem, 3vw, 1.6rem);">
+                        Tư vấn Cá nhân hóa</h3>
+                    <p>Mỗi giải pháp được thiết kế riêng biệt, dựa trên bức tranh tài chính và mục tiêu sống của từng
+                        khách hàng.</p>
+                </div>
+                <div style="flex:1; min-width: 200px;">
+                    <h3
+                        style="font-family: 'Cormorant Garamond'; color: var(--gold-silver); font-size: clamp(1.3rem, 3vw, 1.6rem);">
+                        Đồng hành Tận tâm</h3>
+                    <p>Luôn sẵn sàng lắng nghe và hỗ trợ, trở thành người bạn đồng hành đáng tin cậy trên hành trình xây
+                        dựng tài sản.</p>
                 </div>
             </div>
+        </div>
+        <div class="gold-line" style="margin-top: 4rem;"></div>
+    </section>
 
-            <div class="qr-box reveal">
-                <div class="qr-card">
-                    <h3>Quét mã QR để kết nối nhanh</h3>
-                    <img src="qr-code.jpg" alt="QR code liên hệ">
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="content-layer reveal">
+            <div class="contact-minimal">
+                <h2
+                    style="font-family: 'Cormorant Garamond'; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 400; margin-bottom: 2rem; color: var(--pearl);">
+                    Kết nối & Trao đổi</h2>
+                <div class="contact-details">
+                    <div style="margin-bottom: 0.5rem;">Trần Quang Đam</div>
+                    <div
+                        style="font-size: clamp(0.9rem, 3vw, 1.1rem); letter-spacing: 4px; margin: 0.5rem 0 1.5rem; color: var(--gold-silver);">
+                        Chuyên viên Tư vấn Bất động sản Cao cấp</div>
+
+                    <div style="margin: 1rem 0;">
+                        <a href="tel:0914805823" class="contact-link"
+                            style="font-feature-settings: 'tnum' 1, 'lnum' 1;">
+                            <i class="fas fa-phone-alt" style="margin-right: 12px; color: var(--gold-silver);"></i> 091
+                            480 5823
+                        </a>
+                    </div>
+                    <div style="margin: 1rem 0;">
+                        <a href="mailto:damtqhopnhatland@gmail.com" class="contact-link">
+                            <i class="far fa-envelope" style="margin-right: 12px; color: var(--gold-silver);"></i>
+                            damtqhopnhatland@gmail.com
+                        </a>
+                    </div>
+                    <div style="margin: 1rem 0;">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <i class="fab fa-linkedin" style="margin-right: 12px; color: var(--gold-silver);"></i>
+                            linkedin.com/in/tranquangdam
+                        </a>
+                    </div>
+                    <div style="margin-top: 2rem; font-size: clamp(0.9rem, 2.5vw, 1.1rem);">
+                        <a href="https://maps.google.com/?q=TẦNG+2+TÒA+HH2+BẮC+HÀ,+TỐ+HỮU,+THANH+XUÂN,+HÀ+NỘI"
+                            target="_blank" rel="noopener noreferrer" class="address-link">
+                            <i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Văn phòng: Tầng 2 Tòa HH2
+                            Bắc Hà, Tố Hữu, Thanh Xuân, Hà Nội
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- ===== POPUP GỌI ĐIỆN ===== -->
+    <div class="popup-overlay" id="callPopup">
+        <div class="popup-container">
+            <button class="popup-close" onclick="closePopup('callPopup')">
+                <i class="fas fa-times"></i>
+            </button>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>© 2026 Trần Quang Đam. Chuyên viên tư vấn bất động sản.</p>
+            <div class="popup-icon">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+
+            <h3 class="popup-title">Nhận tư vấn ngay</h3>
+            <p class="popup-subtitle">
+                Để lại số điện thoại hoặc gọi trực tiếp cho tôi để được tư vấn chi tiết về dự án bạn quan tâm.
+            </p>
+
+            <div class="popup-actions">
+                <a href="tel:0902240790" class="popup-btn popup-btn-primary">
+                    <i class="fas fa-phone-alt"></i> Gọi ngay: 0914805823
+                </a>
+            </div>
+
+            <div class="popup-footer" style="color: goldenrod;">
+                Phản hồi trong 5 phút
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- ===== NÚT KÍCH HOẠT POPUP (CÓ THỂ ĐẶT Ở NHIỀU VỊ TRÍ) ===== -->
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0;">
+        <button class="popup-trigger-btn" onclick="openPopup('callPopup')">
+            <i class="fas fa-phone-alt" style="margin-right: 8px;"></i> Gọi tư vấn
+        </button>
+        <button class="popup-trigger-btn" onclick="openPopup('emailPopup')">
+            <i class="far fa-envelope" style="margin-right: 8px;"></i> Nhận tài liệu
+        </button>
+        <button class="popup-trigger-btn" onclick="openPopup('callbackPopup')">
+            <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i> Đặt lịch hẹn
+        </button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="prestige-footer">
+        <div class="footer-inner">
+            <div class="footer-copyright">© 2025 Trần Quang Đam · Giải pháp Bất động sản Cá nhân hóa</div>
+            <div style="color: var(--jade-glow); letter-spacing: 4px; font-size: 0.7rem;">CHUYÊN NGHIỆP · TẬN TÂM · KHÁC
+                BIỆT</div>
         </div>
     </footer>
 
-    <script src="damtq.js"></script>
+    <script>
+        (function () {
+            // Mobile Menu
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.menu-overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMenu() {
+                menuBtn.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            }
+
+            if (menuBtn) {
+                menuBtn.addEventListener('click', toggleMenu);
+                overlay.addEventListener('click', toggleMenu);
+                mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+            }
+
+            // Reveal Animation
+            const reveals = document.querySelectorAll('.reveal');
+            function checkReveal() {
+                for (let el of reveals) {
+                    const windowHeight = window.innerHeight;
+                    const revealTop = el.getBoundingClientRect().top;
+                    if (revealTop < windowHeight - 100) el.classList.add('visible');
+                }
+            }
+
+            window.addEventListener('scroll', checkReveal);
+            window.addEventListener('resize', checkReveal);
+            checkReveal();
+
+            // Header Scroll Effect
+            const header = document.querySelector('.luxury-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.background = 'rgba(8, 22, 22, 0.9)';
+                    header.style.padding = '0.8rem clamp(1rem, 5vw, 5rem)';
+                } else {
+                    header.style.background = 'rgba(10, 26, 26, 0.75)';
+                    header.style.padding = '1.2rem clamp(1rem, 5vw, 5rem)';
+                }
+            });
+
+            // Close mobile menu on window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && mobileMenu && mobileMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        })();
+        // Popup functions
+        function openPopup(popupId) {
+            const popup = document.getElementById(popupId);
+            if (popup) {
+                popup.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closePopup(popupId) {
+            const popup = document.getElementById(popupId);
+            if (popup) {
+                popup.classList.remove('active');
+
+                // Check if any other popup is still open
+                const activePopups = document.querySelectorAll('.popup-overlay.active');
+                if (activePopups.length === 0) {
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+
+        // Close popup when clicking outside
+        document.querySelectorAll('.popup-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function (e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    const activePopups = document.querySelectorAll('.popup-overlay.active');
+                    if (activePopups.length === 0) {
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+        });
+
+        // Close popup with ESC key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup-overlay.active').forEach(popup => {
+                    popup.classList.remove('active');
+                });
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Tự động hiển thị popup khuyến mãi sau 10 giây (chỉ hiện 1 lần mỗi phiên)
+        let promoShown = sessionStorage.getItem('promoPopupShown');
+
+        if (!promoShown) {
+            setTimeout(() => {
+                openPopup('promoPopup');
+                sessionStorage.setItem('promoPopupShown', 'true');
+            }, 10000); // 10 giây
+        }
+
+        // Tự động hiển thị popup gọi điện khi người dùng scroll đến cuối trang
+        let callPopupShown = sessionStorage.getItem('callPopupShown');
+        let hasScrolledToBottom = false;
+
+        window.addEventListener('scroll', () => {
+            if (!hasScrolledToBottom && !callPopupShown) {
+                const scrollPosition = window.scrollY + window.innerHeight;
+                const pageHeight = document.documentElement.scrollHeight;
+
+                if (scrollPosition >= pageHeight - 100) {
+                    hasScrolledToBottom = true;
+                    setTimeout(() => {
+                        openPopup('callPopup');
+                        sessionStorage.setItem('callPopupShown', 'true');
+                    }, 500);
+                }
+            }
+        });
+
+        // Hiển thị popup email khi người dùng rời khỏi trang (exit intent)
+        let emailPopupShown = sessionStorage.getItem('emailPopupShown');
+
+        if (!emailPopupShown) {
+            document.addEventListener('mouseleave', function (e) {
+                if (e.clientY < 0 && !emailPopupShown) {
+                    openPopup('emailPopup');
+                    sessionStorage.setItem('emailPopupShown', 'true');
+                    emailPopupShown = true;
+                }
+            });
+        }
+
+        // Sticky CTA button (nút gọi điện cố định góc phải)
+        const stickyCTA = document.createElement('div');
+        stickyCTA.innerHTML = `
+        <div style="
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        ">
+            <button onclick="openPopup('callPopup')" style="
+                width: 55px;
+                height: 55px;
+                border-radius: 50%;
+                background: linear-gradient(145deg, var(--gold-silver), var(--gold-silver-dark));
+                border: 1px solid var(--gold-silver-light);
+                color: var(--bg-deep);
+                font-size: 1.5rem;
+                cursor: pointer;
+                box-shadow: 0 8px 25px rgba(196, 181, 154, 0.3);
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-phone-alt"></i>
+            </button>
+    `;
+        document.body.appendChild(stickyCTA);
+    </script>
 </body>
 
 </html>
